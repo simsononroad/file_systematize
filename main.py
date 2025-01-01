@@ -14,7 +14,7 @@ file_helyek = [["python", [".py"]],
                ["videok", [".mp4"]]]
 
 
-
+szamolas = 1
 def move(folder_name, files):
     try:
         os.mkdir(folder_name)
@@ -33,4 +33,6 @@ for file in fileok:
     for file_hely in file_helyek:
         for extension in file_hely[1]:
             if extension in file:
-                move(file_hely[0], file)
+                ertek = move(file_hely[0], file)
+                break
+
