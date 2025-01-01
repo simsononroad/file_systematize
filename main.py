@@ -16,7 +16,6 @@ file_helyek = [["python", [".py"]],
 
 
 def move(folder_name, files):
-    consol.print(f"Jelenlegi operációsrendszer: [bold blue]{courrent_os}[/bold blue]")
     try:
         os.mkdir(folder_name)
     except FileExistsError:
@@ -29,6 +28,7 @@ def move(folder_name, files):
 
 path = Path.cwd()
 fileok = os.listdir(path)
+consol.print(f"Jelenlegi operációsrendszer: [bold blue]{courrent_os}[/bold blue]")
 for file in fileok:
     for file_hely in file_helyek:
         for extension in file_hely[1]:
