@@ -1,47 +1,36 @@
 import os
 import platform
 from pathlib import Path
+from rich.console import Console
 
 
 courrent_os = platform.system()
+consol = Console()
+file_helyek = [["python", [".py"]], 
+               ["kepek", [".png", ".jpg"]], 
+               ["json", [".json"]],
+               ["pdf", [".pdf"]],
+               ["hang", [".wav", ".m4a", ".mp3"]],
+               ["videok", [".mp4"]]]
 
 
-def linux():
-    pass
-py = ".py"
 
-def windows():
-    path = Path.cwd()
-    file = os.listdir(path)
-
-    for files in file:
-
-        if ".py" in files:
-            try:
-                os.mkdir("python")
-            except FileExistsError:
-                pass
-            dest = "python"
-            file_p_des = f"{dest}/{files}"
-            os.rename(files, file_p_des)
-        elif ".png" in files or ".jpg" in files:
-            os.mkdir("kepek")
-            dest = "kepek"
-            file_p_des = f"{dest}/{files}"
-            os.rename(files, file_p_des)
-        elif ".json" in files:
-            os.mkdir("json")
-            dest = "json"
-            file_p_des = f"{dest}/{files}"
-            os.rename(files, file_p_des)
-        elif ".pdf" in files:
-            os.mkdir("pdf")
-            dest = "pdf"
-            file_p_des = f"{dest}/{files}"
-            os.rename(files, file_p_des)
+def move(folder_name, files):
+    consol.print(f"Jelenlegi operációsrendszer: [bold blue]{courrent_os}[/bold blue]")
+    try:
+        os.mkdir(folder_name)
+    except FileExistsError:
+        pass
+    dest = folder_name
+    file_p_des = f"{dest}/{files}"
+    os.rename(files, file_p_des)
 
 
-if courrent_os == "Windows":
-    windows()
-elif courrent_os == "Linux":
-    linux()
+
+path = Path.cwd()
+fileok = os.listdir(path)
+for file in fileok:
+    for file_hely in file_helyek:
+        for extension in file_hely[1]:
+            if extension in file:
+                move(file_hely[0], file)
